@@ -1,0 +1,52 @@
+<div class="container">
+  <h1>Listado de Series</h1>
+  <table class="table table-bordered table-hover">
+      <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Canal</th>
+              <th>Temporadas</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let serie of series" (click)="showDetails(serie)">
+              <td>{{ serie.id }}</td>
+              <td>{{ serie.name }}</td>
+              <td>{{ serie.channel }}</td>
+              <td>{{ serie.seasons }}</td>
+          </tr>
+      </tbody>
+      <tfoot>
+          <tr>
+              <td colspan="4" id="averageSeasons" style="font-weight: bold; text-align: center;">
+                  Promedio de temporadas: {{ calculateAverageSeasons() }}
+              </td>
+          </tr>
+      </tfoot>
+  </table>
+</div>
+
+<div *ngIf="selectedSerie" class="modal fade show" tabindex="-1" style="display: block; background-color: rgba(0,0,0,0.5);">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">{{ selectedSerie.name }}</h5>
+              <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="card">
+                  <img [src]="selectedSerie.image" alt="{{ selectedSerie.name }}" class="card-img-top">
+                  <div class="card-body">
+                      <h5 class="card-title">{{ selectedSerie.name }}</h5>
+                      <p class="card-text">{{ selectedSerie.description }}</p>
+                      <a [href]="selectedSerie.link" target="_blank" class="btn btn-primary">Ver más detalles</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
